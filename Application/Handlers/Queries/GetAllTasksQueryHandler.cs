@@ -20,13 +20,7 @@ namespace TaskApplicationWithCQRS.Application.Handlers.Queries
 
         public async Task<IEnumerable<TaskItemDto>> Handle(GetAllTasksQuery request, CancellationToken cancellationToken)
         {
-            return _context.TaskItems.Select(x => new TaskItemDto()
-            {
-                Id = x.Id,
-                Title = x.Title,
-                Description = x.Description,
-                IsCompleted = x.IsCompleted
-            });
+            return _context.TaskItems.Select(x => new TaskItemDto(x));
         }
     }
 }

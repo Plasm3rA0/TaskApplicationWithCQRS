@@ -3,5 +3,5 @@ using TaskApplicationWithCQRS.Domain;
 
 namespace TaskApplicationWithCQRS.Infrastructure.Commands
 {
-    public class UpdateTaskCommand(int Id, string Title, string Description, bool IsDone) : IRequest<TaskItemDto>;
+    public record UpdateTaskCommand(int Id, string Title, string Description, bool IsDone) : IRequest<TaskItemDto>;
 }

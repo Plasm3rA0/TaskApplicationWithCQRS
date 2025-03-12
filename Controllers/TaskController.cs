@@ -28,10 +28,30 @@ namespace TaskApplicationWithCQRS.Controllers
             return await bus.Send(new GetAllTasksQuery());
         }
 
+
+        [HttpGet("{id}")]
+        public async Task<TaskItemDto> GetById(int id)
+        {
+            return await bus.Send(new GetTaskByIdQuery(id));
+        }
+
         [HttpPost]
         public async Task<TaskItemDto> Create([FromBody] CreateTaskCommand command)
         {
             return await bus.Send(command);
+        }
+
+        [HttpPut]
+        public async Task<TaskItemDto> Update([FromBody] UpdateTaskCommand command)
+        {
+            return await bus.Send(command);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            await bus.Send(new DeleteTaskCommand(id));
+            return Ok();
         }
     }
 }

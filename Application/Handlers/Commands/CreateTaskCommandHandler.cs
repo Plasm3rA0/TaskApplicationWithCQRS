@@ -20,7 +20,7 @@ namespace TaskApplicationWithCQRS.Application.Handlers.Commands
 
         public async Task<TaskItemDto> Handle(CreateTaskCommand request, CancellationToken cancellationToken)
         {
-            var taskItem = new TaskItem
+            var taskItem = new TaskItem()
             {
                 Title = request.Title,
                 Description = request.Description
@@ -29,13 +29,7 @@ namespace TaskApplicationWithCQRS.Application.Handlers.Commands
             _context.TaskItems.Add(taskItem);
             await _context.SaveChangesAsync();
 
-            return new TaskItemDto
-            {
-                Id = taskItem.Id,
-                Title = taskItem.Title,
-                Description = taskItem.Description,
-                IsCompleted = taskItem.IsCompleted
-            };
+            return new TaskItemDto(taskItem);
         }
     }
 }
